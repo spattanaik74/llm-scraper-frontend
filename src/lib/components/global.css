@@ -1,0 +1,12 @@
+/* global.css */
+
+body {
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .theme-switch {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+  }
+  
