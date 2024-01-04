@@ -5,11 +5,12 @@
     let searchValue = '';
     let optionValue = '';
     let responseData = {"message": []};
+    let isLoading = false;
 
     const onSubmit = async() => {
         console.log(searchValue);
         console.log(optionValue);
-
+        isLoading = true;
         try {
             var url = `http://127.0.0.1:8000/v1/scrape/${optionValue}?link=${searchValue}`;
             const response = await fetch(url, {
@@ -25,9 +26,13 @@
       const data = await response.json();
       responseData = data;
       console.log(responseData)
+
     } catch (error) {
       console.error("Error fetching data:", error.message);
         }
+      finally {
+        isLoading = false;
+      }
     }
 
 function jsonToTable(responseData) {
@@ -116,22 +121,40 @@ function downloadJson() {
       background-color: #f5f5f5;
     }
 
+    .loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 </style>
 
 <form on:submit|preventDefault={onSubmit}>
     <div class='grid' style="margin-left: 0%;">
-        <input bind:value={searchValue} type="text" id="Searchbar" name="Searchbar" placeholder="Search" required style="width:150%">
+        <input bind:value={searchValue} type="text" id="Searchbar" name="Searchbar" placeholder="Search" required style="width:150%; border-radius: 25px">
         <div class="grid">
-            <select bind:value={optionValue} style="width:55%; float:right; margin-left: 100%;">
+            <select bind:value={optionValue} style="width:55%; float:right; margin-left: 100%;  border-radius: 25px">
                 <option value="" disabled selected>Select</option>
                 <option>product</option>
                 <option>job</option>
             </select>
-            <button style="width:50%; float:right; margin-left: 50%; " type="submit">Search</button>
+            <button style="width:50%; float:right; margin-left: 50%;  border-radius: 25px" type="submit">Search</button>
         </div>
     </div>
 </form>
-<div style="margin-top: 1.5%;  overflow-y: auto; max-height: 400px;">
+{#if isLoading}
+        <div class="loader"></div>
+    {/if}
+<div style="margin-top: 1%;  overflow-y: auto; max-height: 400px;">
     {#if responseData.message.length > 0}
     <table>
       <thead>
@@ -151,8 +174,6 @@ function downloadJson() {
         {/each}
       </tbody>
     </table>
-  {:else}
-    <p>No data available.</p>
   {/if}
 </div>
 <div style="margin-top: 20px;">

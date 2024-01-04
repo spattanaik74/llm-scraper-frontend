@@ -1,4 +1,25 @@
 
+<script>
+    	import { goto } from "$app/navigation";
+
+        let username = '';
+        let email = '';
+        let password = '';
+
+        const submit = async () => {
+            await fetch('http://127.0.0.1:8000/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username,
+                    email,
+                    password
+                })
+            });
+
+            await goto('/login')
+}
+</script>
 <style>
     body {
         margin: 0;
@@ -43,17 +64,12 @@
                     <h1>Sign up</h1>
                     <h2>Please enter your detail</h2>
                 </hgroup>
-                <form>
-                    <input type="text" name="First Name" placeholder="First Name" aria-label="Login" autocomplete="nickname"
+                <form  on:submit|preventDefault={submit}>
+                    <input bind:value={username} type="text" name="First Name" placeholder="Username" aria-label="Login" autocomplete="nickname"
                         required>
-                    <input type="text" name="Last Name" placeholder="Last Name" aria-label="Login" autocomplete="nickname"
+                    <input bind:value={email} name="Email" placeholder="Email" aria-label="Login" autocomplete="nickname"
                         required>
-                    <input type="email" name="Email" placeholder="Email" aria-label="Login" autocomplete="nickname"
-                        required>
-                    <input type="password" name="password" placeholder="Password" aria-label="Password"
-                        autocomplete="current-password" required>
-                    
-                    <input type="password" name="password" placeholder="Check Password" aria-label="Password"
+                    <input  bind:value={password} name="password" placeholder="Password" aria-label="Password"
                         autocomplete="current-password" required>
     
                     <button type="submit" class="contrast">Submit</button>

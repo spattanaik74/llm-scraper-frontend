@@ -1,3 +1,23 @@
+<script>
+    import { goto } from "$app/navigation";
+
+    let name = '';
+    let email = '';
+    let password = '';
+
+    const submit = async () => {
+        await fetch('http://127.0.0.1:8000/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                email,
+                password
+            }, )
+        });
+
+        await goto('/')
+}
+</script>
 <body>
     <main class="container">
         <article class="grid">
@@ -6,10 +26,10 @@
                     <h1>Sign in</h1>
                     <h2>Please enter your detail</h2>
                 </hgroup>
-                <form>
-                    <input type="email" name="Email" placeholder="Email" aria-label="Login" autocomplete="nickname"
+                <form on:submit|preventDefault={submit}>
+                    <input bind:value={email} type="email" name="Email" placeholder="Email" aria-label="Login" autocomplete="nickname"
                         required>
-                    <input type="password" name="password" placeholder="Password" aria-label="Password"
+                    <input bind:value={password} type="password" name="password" placeholder="Password" aria-label="Password"
                         autocomplete="current-password" required>
                     <fieldset>
                         <label for="remember">
