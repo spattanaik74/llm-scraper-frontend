@@ -20,42 +20,32 @@
     let auth = false;
 
     authenticated.subscribe(a => auth = a);
-
+    export let user = { name: 'Sarthak', profilePicture: 'https://avatars.githubusercontent.com/u/23291425?v=4' };
   
   </script>
+
+  <style>
+    aside {
+    height: 120%;
+  }
+
+  /* Set the width of the sidebar to 20% */
+  @media (min-width: 768px) {
+    aside {
+      width: 20%;
+    }
+  }
+  </style>
   
-  <nav class="container">
-      <ul>
-        <li><a href={value} class="secondary">{value}</a></li>
-        <li>
-          <details role="list" dir="rtl">
-            <summary aria-haspopup="listbox" class="secondary" style=" border-radius: 25px">Color</summary>
-            <ul role="listbox">
-              <li><a href="./" data-theme-switcher="auto">Auto</a></li>
-              <li><a href="./" data-theme-switcher="light">Light</a></li>
-              <li><a href="./" data-theme-switcher="dark">Dark</a></li>
-            </ul>
-          </details>
-        </li>
-      </ul>
-      <ul>
-        <li><strong on:click={goToAdmin}>EX. Automation</strong></li>
-      </ul>
-      <ul>
-        {#if login == false}
-        <div>
-          <li><a href="/login" role="button" class="outline">Login</a></li>
-          <li><a href="/signup" role="button" class="secondary outline">Sign up</a></li>
-        </div>
-        {:else}
-        <li role="list" dir="rtl">
-          <a href="#" aria-haspopup="listbox">Sarthak</a>
-          <ul role="listbox">
-            <li><a>Edit</a></li>
-            <li><a href="/admin">admin</a></li>
-            <li><a>Log out</a></li>
-          </ul>
-        </li>
-        {/if}
-      </ul>
-  </nav>
+  <aside class="bg-gray-800 text-white p-4 flex flex-col items-center h-full w-20">
+    {#if user.profilePicture}
+      <img src={user.profilePicture} alt="Profile Picture" class="rounded-full w-16 h-16 mb-2">
+    {/if}
+    {#if user.name}
+      <p class="text-lg font-bold mb-4">{user.name}</p>
+    {/if}
+    <nav class="flex flex-col space-y-2">
+      <a href="/admin" class="text-blue-500 hover:underline" on:click={goToAdmin}>Admin</a>
+      <button class="text-red-500 hover:underline">Logout</button>
+    </nav>
+  </aside>

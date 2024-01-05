@@ -151,7 +151,7 @@
         <input bind:value={link} type="text" id="Searchbar" name="Searchbar" placeholder="website link.." required style="width:150%; border-radius: 25px">
         <div class="grid">
             <select bind:value={search} style="width:55%; float:right; margin-left: 100%;  border-radius: 25px">
-                <option value="" disabled selected>Select</option>
+                <option value="" disabled selected>Type</option>
                 <option>product</option>
                 <option>job</option>
             </select>
@@ -165,7 +165,7 @@
           <tr>
             <th>No.</th>
             <th>Website</th>
-            <th>Product</th>
+            <th>Type</th>
             <th>Edit</th>
           </tr>
         </thead>
