@@ -3,7 +3,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Search from '$lib/components/Search.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { authenticated } from '../stores/auth';
+	// import { authenticated } from '.../stores/auth';
 	import { goto } from '$app/navigation';
 	import Jobcard from '$lib/components/jobcard.svelte';
 	import Modal from '$lib/components/Modal.svelte';

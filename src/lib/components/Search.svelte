@@ -153,7 +153,7 @@ function downloadJson() {
 </form>
 {#if isLoading}
         <div class="loader"></div>
-    {/if}
+  {/if}
 <div style="margin-top: 1%;  overflow-y: auto; max-height: 400px;">
     {#if responseData.message.length > 0}
     <table>
