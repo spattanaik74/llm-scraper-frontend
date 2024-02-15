@@ -33,6 +33,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"file-saver": "^2.0.5",
+		"html2pdf.js": "^0.9.0",
+		"jspdf": "^2.5.1",
+		"pdfmake": "^0.2.9",
+		"svelte-typewriter": "^3.2.3",
 		"xlsx": "^0.18.5"
 	}
 }

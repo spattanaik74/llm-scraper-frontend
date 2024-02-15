@@ -186,6 +186,17 @@
 			closeModal();
 		}
 	}
+	let selectedOptions = [];
+	let dropdownOpen = false;
+
+	const options = ["title", "author", "date", "content", "price", "description", "experience"];	
+	function toggleSelection(option) {
+    if (selectedOptions.includes(option)) {
+      selectedOptions = selectedOptions.filter((selected) => selected !== option);
+    } else {
+      selectedOptions = [...selectedOptions, option];
+    }
+  }
 </script>
 
 <div class="flex h-screen">
@@ -206,6 +217,36 @@
 				<option>job</option>
 				<option>product</option>
 			</select>
+			<div style="width: 400px;">
+				<div class="main-select" style="width: 400px;">
+					<div class="dropdown-symbol" on:click={() => dropdownOpen = !dropdownOpen}>
+						&#9660;
+					  </div>
+				  {#each selectedOptions as option}
+					<div
+					  class="chip"
+					  on:click={() => toggleSelection(option)}
+					>
+					  {option}
+					</div>
+				  {/each}
+				</div>
+				
+				
+				
+				<div class="dropdown {dropdownOpen ? '' : 'hidden'}" style="width: 400px;">
+				  {#each options as option}
+					<div
+					  class="dropdown-item {selectedOptions.includes(option) ? 'selected' : ''}"
+					  on:click={() => toggleSelection(option)}
+					>
+					  {option}
+					</div>
+				  {/each}
+				</div>
+			  </div>
+			  
+			  
 			<button class="btn btn-outline btn-accent m-2 shadow-xl">Search</button>
 		</div>
 		</form>
@@ -401,4 +442,35 @@
 		max-height: 200px;
 		overflow-y: auto;
 	}
+	.select-data {
+    @apply relative inline-block text-left w-full max-w-md m-2 shadow-xl;
+  }
+
+  .main-select {
+    @apply w-full max-w-md m-2 shadow-xl flex flex-wrap;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full py-1 px-3 m-1 cursor-pointer text-white bg-blue-400;
+  }
+
+  .dropdown {
+    @apply rounded-md bg-[#ece3ca] border border-gray-400 -mt-1 shadow-md py-1 max-w-lg absolute z-10;
+  }
+
+  .dropdown-symbol {
+    @apply inline-flex items-center px-3 py-1 m-2 cursor-pointer text-black;
+  }
+
+  .dropdown-item {
+    @apply block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer;
+  }
+
+  .selected {
+    @apply bg-blue-400;
+  }
+
+  .hidden {
+    display: none !important;
+  }
 </style>

@@ -13,6 +13,10 @@
     let extractionProductTitle = 'Content Extraction';
     let extractionProductDescription = 'You can play with it and check the current data of your choice';
 
+    let contentGeneration = '/content-generation';
+    let contentGenerationTitle = 'Content Generation';
+    let contentGenerationDescription = 'You can provide documents and provide your knowledgebase with QnA';
+
 </script>
 
 <style>
@@ -31,8 +35,8 @@
             <div class="inline-block w-48 h-36 border border-gray-300 m-16 ml-36">
                 <DashboardCard productName={extractionProductTitle} productDescription={extractionProductDescription} productPath={extactionProductRoute} />
             </div>
-            <!-- <div class="inline-block w-48 h-36 border border-gray-300 m-16 ml-36">
-                <DashboardCard />
+            <div class="inline-block w-48 h-36 border border-gray-300 m-16 ml-36">
+                <DashboardCard productName={contentGenerationTitle} productDescription={contentGenerationDescription} productPath={contentGeneration}/>
             </div>
             <div class="inline-block w-48 h-36 border border-gray-300 m-16 ml-36">
                 <DashboardCard />
@@ -42,7 +46,7 @@
             </div>
             <div class="inline-block w-48 h-36 border border-gray-300 m-16 ml-36">
                 <DashboardCard />
-            </div> -->
+            </div>
         </div>
 
     </div>
